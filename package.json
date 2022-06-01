@@ -1,0 +1,12 @@
+{
+  "name": "pokeclickerbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+   "dev": "rollup src/index.js --file build/bundle.js --format cjs --watch",
+   "build": "rollup src/index.js --file build/bundle.js --format cjs"
+  },
+  "author": "",
+  "license": "ISC"
+}
