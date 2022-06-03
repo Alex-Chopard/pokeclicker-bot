@@ -20,3 +20,5 @@ var _farmBot = new FarmBot()
 _farmBot.init()
 var _gymBot = new GymBot()
 _gymBot.init()
+
+console.log('test')
