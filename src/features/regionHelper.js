@@ -1,24 +1,24 @@
 import { v4 as uuidv4 } from 'uuid';
 
 class RegionHelper {
-  observer = null
   currentRegion = null
-
+  
+  _observer = null
   _selector = '#townMap div[href="#mapBody"]'
   _titleElement = null
   _listeners = []
 
   initialize () {
     this._titleElement = document.querySelector(this._selector)
-    if (!this._titleElement) console.error('Map not found!')
+    if (!this._titleElement) return console.error('Map not found!')
 
-    if (this.observer) {
-      this.observer.disconnect()
-      this.observer = null
+    if (this._observer) {
+      this._observer.disconnect()
+      this._observer = null
     }
 
-    this.observer = new MutationObserver(this._findRegion.bind(this))
-    this.observer.observe(this._titleElement, { childList: true, characterData: true, subtree: true })
+    this._observer = new MutationObserver(this._findRegion.bind(this))
+    this._observer.observe(this._titleElement, { childList: true, characterData: true, subtree: true })
 
     this._findRegion()
   }
