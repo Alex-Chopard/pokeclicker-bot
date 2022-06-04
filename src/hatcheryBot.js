@@ -138,8 +138,8 @@ class HatcheryBot {
   }
 
   _hatcheryQueueCount () {
-    const svg = document.querySelector('svg#map')
-    const count = svg.childElementCount
+    const select = document.querySelector('select[name="breedingRegionFilter"]')
+    const count = select.childElementCount - 2 // Remove All & None
     const keys = Object.keys(HATCHERY_QUEUE_COUNT)
     const key = count <= keys.length
       ? keys[count - 1]
