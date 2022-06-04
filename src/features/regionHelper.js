@@ -5,11 +5,12 @@ class RegionHelper {
   currentRegion = null
 
   _selector = '#townMap div[href="#mapBody"]'
+  _titleElement = null
   _listeners = []
 
   initialize () {
-    const title = document.querySelector(this._selector)
-    if (!title) console.error('Map not found!')
+    this._titleElement = document.querySelector(this._selector)
+    if (!this._titleElement) console.error('Map not found!')
 
     if (this.observer) {
       this.observer.disconnect()
@@ -17,7 +18,7 @@ class RegionHelper {
     }
 
     this.observer = new MutationObserver(this._findRegion.bind(this))
-    this.observer.observe(title, { childList: true, characterData: true, subtree: true })
+    this.observer.observe(this._titleElement, { childList: true, characterData: true, subtree: true })
 
     this._findRegion()
   }
@@ -40,12 +41,10 @@ class RegionHelper {
   }
 
   _findRegion () {
-    const titleElement = document.querySelector(this._selector)
-    if (!titleElement) return
+    if (!this._titleElement) return
 
-    const text = titleElement.textContent
+    const text = this._titleElement.textContent
     if (!text) return
-
 
     const matches = text.match(/\((.*)\)/)
     if (matches && matches.length > 0 && matches[1]) {
